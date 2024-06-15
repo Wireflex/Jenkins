@@ -1,5 +1,4 @@
-FROM alpine
-RUN apk add --no-cache curl wget busybox-extras netcat-openbsd python py-pip 
-RUN pip install awscli
-RUN apk --purge -v del py-pip
-CMD tail -f /dev/null
+FROM ubuntu:24.10
+RUN apt-get update
+RUN apt-get install nginx -y                                
+CMD ["nginx","-g","daemon off;"]
