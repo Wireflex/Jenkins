@@ -12,13 +12,31 @@ pipeline {
         timestamps()
     }
     stages {
+        stage("docker login") {
+            steps {
+                echo " ============== docker login =================="
+                withCredentials([usernamePassword(credentialsId: 'dockerhub_wireflex', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    docker login -u $USERNAME -p $PASSWORD
+                    """
+                }
+            }
+        }
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
                 dir ('Docker/toolbox/') {
-                	sh 'docker build . '
+                	sh 'docker build -t wireflex/toolbox:1 . '
                }
            }
         }
+     stage("docker push") {
+           steps {
+                echo " ============== start pushing image =================="
+                sh '''
+                docker push wireflex/toolbox:1
+                '''
+            }
+        }
     }
-} 
+}
