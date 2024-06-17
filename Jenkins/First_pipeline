@@ -1,5 +1,5 @@
 #!groovy
-// Check dota1 properties
+// Check 94.142.141.77 properties
 properties([disableConcurrentBuilds()])
 
 pipeline {
