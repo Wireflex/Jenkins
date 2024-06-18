@@ -1,2 +1,2 @@
 FROM nginx:alpine
-COPY ./index.html /var/www/html/
+COPY /var/lib/jenkins/index.html /var/www/html/
