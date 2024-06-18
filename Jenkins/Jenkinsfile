@@ -11,11 +11,10 @@ pipeline {
     stages {
         stage("docker login") {
             steps {
-                echo " ============== docker login =================="
+                echo " ============== docker login and push =================="
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_wireflex', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh """
-                    docker login -u $USERNAME -p $PASSWORD
-                    """
+                    sh 'docker login -u $USERNAME -p $PASSWORD'
+                    sh 'docker push wireflex/test'
                 }
             }
         }
@@ -27,13 +26,6 @@ pipeline {
                }
            }
         }
-     stage("docker push") {
-           steps {
-                echo " ============== start pushing image =================="
-                sh 'docker push wireflex/test'
-              }
-         }
-    }
     stage("pizdec") {
            steps {
                 echo " ============== start pizdec =================="
