@@ -33,7 +33,6 @@ pipeline {
                     sh 'cd ~ && sudo cp docker-compose.yml docker-compose.yaml'
                     sh "ssh root@94.142.141.77 'rm docker-compose.yaml'"
                     sh 'cd ~ && scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
-                    sh 'cd ~ && rm docker-compose-yaml'
               }
          }
         stage("Deploy on Remote Server") {
