@@ -13,6 +13,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
+                    sh 'docker rmi wireflex/test'
                 dir ('Jenkins') {
                     sh 'docker build -t wireflex/test . '
                 }
@@ -39,6 +40,7 @@ pipeline {
             steps {
                 echo " Connect to production and deploy"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
+                    sh "ssh root@94.142.141.77 'docker rmi wireflex/test'"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
             }
         }
