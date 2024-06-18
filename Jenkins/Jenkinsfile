@@ -24,7 +24,7 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
-                dir ('Docker/toolbox/') {
+                dir ('Jenkins') {
                 	sh 'docker build -t wireflex/test . '
                }
            }
