@@ -34,7 +34,7 @@ pipeline {
               }
          }
     }
-        stage('Deploy on Remote Server') {
+        stage("Deploy on Remote Server") {
             steps {
                 echo " Connect to production and deploy"
                     sh "ssh root@94.142.141.77 'docker compose down'"
