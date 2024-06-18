@@ -25,7 +25,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('Docker/toolbox/') {
-                	sh 'docker build -t wireflex/toolbox:1 . '
+                	sh 'docker build -t wireflex/test . '
                }
            }
         }
@@ -33,7 +33,7 @@ pipeline {
            steps {
                 echo " ============== start pushing image =================="
                 sh '''
-                docker push wireflex/toolbox:1
+                docker push wireflex/test
                 '''
             }
         }
