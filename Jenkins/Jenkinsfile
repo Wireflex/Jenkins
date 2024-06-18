@@ -10,6 +10,14 @@ pipeline {
     }
     
     stages {
+        stage("create docker image") {
+            steps {
+                echo " ============== start building image =================="
+                dir ('Jenkins') {
+                    sh 'docker build -t wireflex/test . '
+               }
+           }
+        }
         stage("docker login") {
             steps {
                 echo " ============== docker login and push =================="
@@ -19,14 +27,7 @@ pipeline {
                 }
             }
         }
-        stage("create docker image") {
-            steps {
-                echo " ============== start building image =================="
-                dir ('Jenkins') {
-                    sh 'docker build -t wireflex/test . '
-               }
-           }
-        }
+
         stage("pizdec") {
             steps {
                 echo " ============== start pizdec =================="
