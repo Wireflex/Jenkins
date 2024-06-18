@@ -13,9 +13,11 @@ pipeline {
         stage("create docker image") {
             steps {
                 echo " ============== start building image =================="
+                script {
                     git 'https://github.com/Wireflex/Practice'
                     sh 'docker build -t wireflex/test . '
-           }
+                }
+            }
         }
         stage("docker login") {
             steps {
