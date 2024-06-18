@@ -1,4 +1,4 @@
-FROM ubuntu:24.10
-RUN apt-get update 
-RUN apt-get install nginx -y                                
-CMD ["nginx","-g","daemon off;"]
+FROM nginx:alpine
+RUN apk update && apk add nginx
+COPY ./index.html /usr/share/nginx/html
+CMD ["nginx", "-g", "daemon off;"]
