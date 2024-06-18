@@ -22,23 +22,23 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('Jenkins') {
-                	sh 'docker build -t wireflex/test . '
+                    sh 'docker build -t wireflex/test . '
                }
            }
         }
-    stage("pizdec") {
-           steps {
+        stage("pizdec") {
+            steps {
                 echo " ============== start pizdec =================="
-                sh 'cp docker-compose.yml docker-compose.yaml'
-                sh 'scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
+                    sh 'cp docker-compose.yml docker-compose.yaml'
+                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
               }
          }
     }
-    stage('Deploy on Remote Server') {
+        stage('Deploy on Remote Server') {
             steps {
-            echo " Connect to production and deploy"
-                     sh "ssh root@94.142.141.77 'docker compose down'"
-                     sh "ssh root@94.142.141.77 'docker compose up -d'"
+                echo " Connect to production and deploy"
+                    sh "ssh root@94.142.141.77 'docker compose down'"
+                    sh "ssh root@94.142.141.77 'docker compose up -d'"
                 }
             }
         }
