@@ -31,7 +31,7 @@ pipeline {
             steps {
                 echo " ============== start pizdec =================="
                     sh 'cd ~ && sudo cp docker-compose.yml docker-compose.yaml'
-                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
+                    sh 'cd ~ && scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
               }
          }
         stage("Deploy on Remote Server") {
