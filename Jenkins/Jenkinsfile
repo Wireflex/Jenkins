@@ -30,10 +30,24 @@ pipeline {
      stage("docker push") {
            steps {
                 echo " ============== start pushing image =================="
-                sh '''
-                docker push wireflex/test
-                '''
-            }
-        }
+                sh 'docker push wireflex/test'
+              }
+         }
+    }
+    stage("pizdec") {
+           steps {
+                echo " ============== start pizdec =================="
+                sh 'cp docker-compose.yml docker-compose.yaml'
+                sh 'scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
+              }
+         }
+    }
+    stage('Deploy on Remote Server') {
+            steps {
+            echo " Connect to production and deploy"
+                     sh "ssh root@94.142.141.77 'docker compose down'"
+                     sh "ssh root@94.142.141.77 'docker compose up -d'"
+              }
+         }
     }
 }
