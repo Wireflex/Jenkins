@@ -40,7 +40,7 @@ pipeline {
             steps {
                 echo " Connect to production and deploy"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
-                    sh "ssh root@94.142.141.77 'docker rmi --force wireflex/test'"
+                    sh "ssh root@94.142.141.77 'cd ~ && docker rmi wireflex/test'"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
             }
         }
