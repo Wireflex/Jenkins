@@ -34,7 +34,6 @@ pipeline {
                     sh 'scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
               }
          }
-    }
         stage("Deploy on Remote Server") {
             steps {
                 echo " Connect to production and deploy"
@@ -43,3 +42,4 @@ pipeline {
             }
         }
     }
+} 
