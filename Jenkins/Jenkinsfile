@@ -42,6 +42,7 @@ EOF"""
             steps {
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
+                    sh "ssh root@94.142.141.77 'cd ~ && docker system prune'"
             }
         }
     }
