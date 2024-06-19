@@ -41,7 +41,7 @@ EOF"""
         stage("Deploying at Production server") {
             steps {
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
-                    sh "ssh root@94.142.141.77 'cd ~ && docker rmi -f $(docker images -qa)'" 
+                    sh "ssh root@94.142.141.77 'cd ~ && docker system prune -a'" 
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
             }
         }
