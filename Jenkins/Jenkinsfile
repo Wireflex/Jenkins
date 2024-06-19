@@ -25,7 +25,7 @@ pipeline {
         }
         stage("Mutnaya hrenovina") {
             steps {
-                    sh """ssh root@94.142.141.77 'cd ~ && ls -la'
+                    sh """ 'cd ~ && ls -la'
                     cd ~ && cat << 'EOF' > docker-compose.yml 
 services:
   test:
