@@ -26,7 +26,7 @@ pipeline {
         }
         stage("pizdec") {
             steps {
-                    sh """ssh root@94.142.141.77 'cd ~ && rm docker-compose.yaml'
+                    sh """ssh root@94.142.141.77 'cd ~ && ls -la'
                     cd ~ && cat << 'EOF' > docker-compose.yml
 services:
   test:
