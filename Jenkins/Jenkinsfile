@@ -8,26 +8,26 @@ pipeline {
     }
     
     stages {
-        stage("create docker image") {
+        stage("Creating Docker Image") {
             steps {
-                    sh 'docker rmi wireflex/test'
+                    sh 'docker rmi wireflex/jenkins'
                 dir ('Jenkins') {
-                    sh 'docker build -t wireflex/test . '
+                    sh 'docker build -t wireflex/jenkins . '
                 }
             }
         }
-        stage("docker login") {
+        stage("DockerHub Login and Push") {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_wireflex', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'docker login -u $USERNAME -p $PASSWORD'
-                    sh 'docker push wireflex/test'
+                    sh 'docker push wireflex/jenkins'
                 }
             }
         }
-        stage("pizdec") {
+        stage("Mutnaya hrenovina") {
             steps {
                     sh """ssh root@94.142.141.77 'cd ~ && ls -la'
-                    cd ~ && cat << 'EOF' > docker-compose.yml
+                    cd ~ && cat << 'EOF' > docker-compose.yml 
 services:
   test:
     image: wireflex/test
@@ -35,14 +35,14 @@ services:
       - '80:80'
     restart: unless-stopped
 EOF"""
-                    sh 'sudo cp docker-compose.yml docker-compose.yaml'
-                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
+                    sh 'cd ~ && sudo cp docker-compose.yml docker-compose.yaml'
+                    sh 'cd ~ && scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
               }
          }
-        stage("Deploy on Remote Server") {
+        stage("Deploying at Production server") {
             steps {
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
-                    sh "ssh root@94.142.141.77 'cd ~ && docker rmi wireflex/test'"
+                    sh "ssh root@94.142.141.77 'cd ~ && docker rmi wireflex/jenkins'"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
             }
         }
