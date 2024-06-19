@@ -25,15 +25,16 @@ pipeline {
         }
         stage("Mutnaya hrenovina") {
             steps {
-                    sh """ 'cd ~ && ls -la'
-                    cd ~ && cat << 'EOF' > docker-compose.yml 
+                   sh """
+                   cd ~ && cat << 'EOF' > docker-compose.yml 
 services:
   test:
     image: wireflex/jenkins
     ports:
       - '80:80'
     restart: unless-stopped
-EOF"""
+EOF
+"""
                     sh 'cd ~ && sudo cp docker-compose.yml docker-compose.yaml'
                     sh 'cd ~ && scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
               }
