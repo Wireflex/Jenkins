@@ -1,5 +1,3 @@
-#!groovy
-// Run docker build
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -12,7 +10,6 @@ pipeline {
     stages {
         stage("create docker image") {
             steps {
-                echo " ============== start building image =================="
                     sh 'docker rmi wireflex/test'
                 dir ('Jenkins') {
                     sh 'docker build -t wireflex/test . '
@@ -21,7 +18,6 @@ pipeline {
         }
         stage("docker login") {
             steps {
-                echo " ============== docker login and push =================="
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_wireflex', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     sh 'docker login -u $USERNAME -p $PASSWORD'
                     sh 'docker push wireflex/test'
@@ -30,15 +26,21 @@ pipeline {
         }
         stage("pizdec") {
             steps {
-                echo " ============== start pizdec =================="
-                    sh "ssh root@94.142.141.77 'rm docker-compose.yaml'"
+                    sh "ssh root@94.142.141.77 'cd ~ && rm docker-compose.yaml'"
+                    sh "cd ~ && cat << 'EOF' > docker-compose.yml
+services:
+  test:
+    image: wireflex/test
+    ports:
+      - '80:80'
+    restart: unless-stopped
+EOF "
                     sh 'cd ~ && sudo cp docker-compose.yml docker-compose.yaml'
                     sh 'cd ~ && scp -i ~/.ssh/id_rsa docker-compose.yaml  root@94.142.141.77:/root'
               }
          }
         stage("Deploy on Remote Server") {
             steps {
-                echo " Connect to production and deploy"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
                     sh "ssh root@94.142.141.77 'cd ~ && docker rmi wireflex/test'"
                     sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
