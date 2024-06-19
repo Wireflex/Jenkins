@@ -11,7 +11,7 @@ pipeline {
         stage("Creating Docker Image") {
             steps {
                 dir ('Jenkins') {
-                    sh 'docker build -t wireflex/jenkins . '
+                    sh 'docker build -t wireflex/jenkins . ' 
                 }
             }
         }
