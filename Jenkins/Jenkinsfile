@@ -36,14 +36,12 @@ services:
     restart: unless-stopped
 EOF
 """
-                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yml  root@94.142.141.77:/root'
+                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yml  root@94.142.141.77:.'
               }
          }
         stage("Deploying at Production server") {
             steps {
-                    sh "ssh root@94.142.141.77 'docker compose down'"
-                    sh "ssh root@94.142.141.77 'echo \"y\" | docker system prune -a'"
-                    sh "ssh root@94.142.141.77 'docker compose up -d'"
+                   sh "ssh root@94.142.141.77 'docker compose down && echo \"y\" | docker system prune -a && docker compose up -d'"
             }
         }
     }
