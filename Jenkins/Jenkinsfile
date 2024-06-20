@@ -40,9 +40,9 @@ EOF
          }
         stage("Deploying at Production server") {
             steps {
-                    sh "ssh root@94.142.141.77 'cd ~ && docker compose down'"
-                    sh "ssh root@94.142.141.77 'cd ~ && echo \"y\" | docker system prune -a'"
-                    sh "ssh root@94.142.141.77 'cd ~ && docker compose up -d'"
+                    sh "ssh root@94.142.141.77 'docker compose down'"
+                    sh "ssh root@94.142.141.77 'echo \"y\" | docker system prune -a'"
+                    sh "ssh root@94.142.141.77 'docker compose up -d'"
             }
         }
     }
