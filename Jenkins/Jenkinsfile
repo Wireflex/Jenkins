@@ -19,8 +19,7 @@ pipeline {
         stage("DockerHub Login and Push") {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub_wireflex', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh 'docker login -u $USERNAME -p $PASSWORD'
-                    sh 'docker push wireflex/jenkins'
+                    sh 'docker login -u $USERNAME -p $PASSWORD && docker push wireflex/jenkins'
                 }
             }
         }
