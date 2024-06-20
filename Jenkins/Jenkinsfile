@@ -29,14 +29,14 @@ pipeline {
                    sh """
                    cat << 'EOF' > docker-compose.yml 
 services:
-  jenkins:
+  test:
     image: wireflex/jenkins
     ports:
       - '80:80'
     restart: unless-stopped
 EOF
 """
-                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yml  root@94.142.141.77:.'
+                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yml  root@94.142.141.77:/root'
               }
          }
         stage("Deploying at Production server") {
