@@ -29,7 +29,7 @@ pipeline {
                    sh """
                    cat << 'EOF' > docker-compose.yml 
 services:
-  jenkins:
+  test:
     image: wireflex/jenkins
     ports:
       - '80:80'
