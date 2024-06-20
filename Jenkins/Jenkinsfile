@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
 EOF
 """
-                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yml  root@94.142.141.77:/root'
+                    sh 'scp -i ~/.ssh/id_rsa docker-compose.yml  root@94.142.141.77:.'
               }
          }
         stage("Deploying at Production server") {
