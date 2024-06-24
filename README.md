@@ -2,4 +2,4 @@
 
 
 Status of Last Deployment:<br>
-[![My-GitHubActions-Basics](https://github.com/Wireflex/Practice/actions/workflows/first_actions.yml/badge.svg?branch=main)](https://github.com/Wireflex/Practice/actions/workflows/first_actions.yml)
+[![Build and Push Docker image to Docker Hub](https://github.com/Wireflex/Practice/actions/workflows/second_test.yml/badge.svg?branch=main)](https://github.com/Wireflex/Practice/actions/workflows/second_test.yml)
