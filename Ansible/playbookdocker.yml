@@ -1,0 +1,6 @@
+---
+- name: Deploy on remote servers
+  hosts: all
+  tasks:
+  - name: Prepare and compose
+    shell: docker compose down && echo 'y' | docker system prune -a &&  docker-compose up -d
