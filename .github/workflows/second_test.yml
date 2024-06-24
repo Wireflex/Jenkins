@@ -1,0 +1,17 @@
+name: My-GitHubActions-Basics2
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  my_testing:
+    runs-on: self-hosted
+
+    steps:
+    - name: Print Hello Message in Testing
+      run : echo "Hello World from Testing job"
+      
+    - name: List current folder
+      run : ls -la
