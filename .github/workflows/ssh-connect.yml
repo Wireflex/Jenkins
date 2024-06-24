@@ -1,24 +1,21 @@
-name: Deploy to Server
+name: SSH and Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-    - name: Set up SSH
-      uses: shimataro/ssh-key-action@v2
+    steps:       
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
       with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
-        known_hosts: |
-          94.142.142.172 wireflex
-    - name: Connect to server
-      run: |
-        ssh -T root@94.142.142.172
-        cd /root
-        ls -la
+        port: 22
+        script: |
+          cd /root
+          ls -la
