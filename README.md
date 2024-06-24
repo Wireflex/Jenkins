@@ -2,4 +2,4 @@
 
 
 Status of Last Deployment:<br>
-<img src="https://github.com/Wireflex/Practice/workflows/My-GitHubActions-Basics/badge.svg?branch=main"><br>
+[![My-GitHubActions-Basics](https://github.com/Wireflex/Practice/actions/workflows/first_actions.yml/badge.svg?branch=main)](https://github.com/Wireflex/Practice/actions/workflows/first_actions.yml)
