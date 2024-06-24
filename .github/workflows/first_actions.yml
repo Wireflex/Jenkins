@@ -1,7 +1,7 @@
-name: My-GitHubActions-Basics
-env:
-  APPLICATION_NAME    : "MyDota"
-  DEPLOY_PACKAGE_NAME : "Dota-deploy-ver-${{ github.sha }}"           # Глобальные переменные (на весь файл)
+#name: My-GitHubActions-Basics
+#env:
+#  APPLICATION_NAME    : "MyDota"
+#  DEPLOY_PACKAGE_NAME : "Dota-deploy-ver-${{ github.sha }}"           # Глобальные переменные (на весь файл)
 
 #on:
 #  push:
