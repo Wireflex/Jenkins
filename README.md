@@ -2,4 +2,4 @@
 
 
 Status of Last Deployment:<br>
-<img src="https://github.com/Wireflex/Practice/workflows/My-GitHubActions-Basics/badge.svg?branch=master"><br>
+<img src="https://github.com/Wireflex/Practice/workflows/My-GitHubActions-Basics/badge.svg?branch=main"><br>
