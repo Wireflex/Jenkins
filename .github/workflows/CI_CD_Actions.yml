@@ -1,4 +1,4 @@
-name: Build and Push Docker image to Docker Hub
+name: CI_CD_Actions
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
     - main
     
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+
+  build_and_push:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -25,3 +25,17 @@ jobs:
           context: Jenkins/
           push: true
           tags: wireflex/actions
+          
+  deploy_at_remote:
+    runs-on: ubuntu-latest
+    steps:       
+    - name: Deploy using ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /root
+          docker compose down && echo 'y' | docker system prune -a &&  docker-compose up -d
