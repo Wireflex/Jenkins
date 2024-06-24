@@ -1,21 +1,24 @@
+name: Deploy to Server
+
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
-  
+    branches: [main]
+
 jobs:
-  run_pull:
-    name: run pull
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: install ssh keys
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Set up SSH
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: |
+          94.142.142.172 wireflex
+    - name: Connect to server
       run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "ls -la"
-    - name: cleanup
-      run: rm -rf ~/.ssh
+        ssh -T root@94.142.142.172
+        cd /root
+        ls -la
