@@ -1,17 +1,23 @@
-name: My-GitHubActions-Basics2
+name: Build and Push Docker image to Docker Hub
 
-on:
-  push:
-    branches: 
-      - main
-
+on: push
 jobs:
-  my_testing:
-    runs-on: self-hosted
-
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
     steps:
-    - name: Print Hello Message in Testing
-      run : echo "Hello World from Testing job"
+      - name: Check out the repo
+        uses: actions/checkout@v4
       
-    - name: List current folder
-      run : ls -la
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3.2.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6.1.0
+        with:
+          context: Jenkins/
+          push: true
+          tags: wireflex/actions
