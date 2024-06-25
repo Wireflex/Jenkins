@@ -3,4 +3,4 @@
   hosts: all
   tasks:
   - name: Prepare and compose
-    shell: docker compose down && echo 'y' | docker system prune -a &&  docker-compose up -d
+    shell: docker compose down && echo 'y' | docker system prune -a &&  docker compose up -d
