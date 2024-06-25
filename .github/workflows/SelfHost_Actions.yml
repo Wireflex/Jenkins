@@ -30,6 +30,8 @@ jobs:
     runs-on: self-hosted
     needs: [build_and_push]
     steps:
-    - name: Deploy at remote server
-      run: |
-           "ssh root@94.142.141.77 'docker compose down && echo \"y\" | docker system prune -a && docker compose up -d'"
+          - name: Deploy at remote server
+            run: |
+              ssh root@94.142.141.77 'docker-compose down'
+              ssh root@94.142.141.77 'echo "y" | docker system prune -a'
+              ssh root@94.142.141.77 'docker-compose up -d'
