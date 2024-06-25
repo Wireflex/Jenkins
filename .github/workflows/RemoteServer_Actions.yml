@@ -28,6 +28,7 @@ jobs:
           
   deploy_at_remote:
     runs-on: ubuntu-latest
+    needs: [build_and_push]
     steps:       
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
