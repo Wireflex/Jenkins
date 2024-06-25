@@ -38,4 +38,4 @@ jobs:
         port: 22
         script: |
           cd /root
-          docker compose down && echo 'y' | docker system prune -a &&  docker-compose up -d
+          docker compose down && echo 'y' | docker system prune -a &&  docker compose up -d
