@@ -1,4 +1,4 @@
-name: CI_CD_Actions
+name: RemoteServer_Actions
 
 on:
   push:
