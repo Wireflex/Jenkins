@@ -32,4 +32,4 @@ jobs:
     steps:
           - name: Deploy at remote server
             run: |
-               cd ansible && ansible-playbook playbookdocker.yml
+               cd /~/ansible && ansible-playbook playbookdocker.yml
