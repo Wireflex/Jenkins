@@ -1,0 +1,35 @@
+name: Ansible_Actions
+
+on:
+  push:
+    branches: 
+    - main
+    
+jobs:
+
+  build_and_push:
+    runs-on: self-hosted
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3.2.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6.1.0
+        with:
+          context: Jenkins/
+          push: true
+          tags: wireflex/actions
+  
+  deploy:
+    runs-on: self-hosted
+    needs: [build_and_push]
+    steps:
+          - name: Deploy at remote server
+            run: |
+               cd ansible && ansible-playbook playbookdocker.yml
