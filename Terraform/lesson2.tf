@@ -1,4 +1,4 @@
-# TERRAFORM by Wireflex
+# TERRAFORM by Wireflex  https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_security_group
 
 provider "aws" {
   region = "eu-central-1"
