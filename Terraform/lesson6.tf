@@ -50,7 +50,7 @@ resource "aws_instance" "web_server" {
   instance_type = "t2.micro"
   key_name = "wireflex-key-frankfurt"
 
-  vpc_security_group_ids = [aws_security_group.web_serverh.id]
+  vpc_security_group_ids = [aws_security_group.web_server.id]
 
   user_data = templatefile("user_data.sh.tpl", {
     f_name = "Nikita",
