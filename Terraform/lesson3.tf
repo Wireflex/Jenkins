@@ -63,7 +63,7 @@ output "public_ip" {
 
 #  tags = {
 #    Name  = "Web Server Build by Terraform"
-#    Owner = "Denis Astahov"
+#    Owner = "Wireflex"
 #  }
 #}
 # а в user_data.sh закинуть скрипт
