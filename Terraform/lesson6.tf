@@ -62,8 +62,12 @@ resource "aws_instance" "web_server" {
     Name  = "Web Server Build by Terraform"
     Owner = "Wireflex"
   }
-    lifecycle {
+
+   lifecycle {
     create_before_destroy = true
+ 
+ # depends_on = [aws_instance.my_server_db]
+
   }
 }
 
