@@ -17,3 +17,5 @@ common_tags = {
   CostCenter  = "12345"
   Environment = "dev"
 }
+
+terraform apply -var-file="dev.tfvars"
